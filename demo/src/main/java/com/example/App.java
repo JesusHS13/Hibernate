@@ -30,17 +30,20 @@ public class App {
                 .buildMetadata()
                 .buildSessionFactory();
         Session session = sessionFactory.openSession();
-        var tr = session.beginTransaction();
+        
         //Foo foo = new Foo();
         //foo.id = 2;
         //foo.name="Jesús";
         //foo.dni="1234A";
         //session.persist(foo);
-        Foo foo= session.get(Foo.class, 1);
-        foo.dni="87258j";
-        session.persist(foo);
+        Foo foo= session.get(Foo.class, 44);
+        if (foo != null){ 
+            session.remove(foo);
+        }
         
-        tr.commit();
+        
+        var tr = session.beginTransaction();
+               tr.commit();
         session.close();
 
     }
